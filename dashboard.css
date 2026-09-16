@@ -1,0 +1,670 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #14213d;
+}
+
+/* ================= TOP BAR ================= */
+
+.topbar {
+    height: 85px;
+    background: linear-gradient(90deg, #292852, #37336d);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 35px;
+    gap: 35px;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 285px;
+}
+
+.logo-icon {
+    font-size: 40px;
+    color: #f28ac2;
+}
+
+.logo-section h2 {
+    font-size: 22px;
+    margin-bottom: 3px;
+}
+
+.logo-section span {
+    font-size: 14px;
+    color: #c7c5e8;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+}
+
+nav a:hover,
+nav a.active {
+    background: linear-gradient(135deg, #7545d8, #6240c2);
+}
+
+nav i {
+    font-size: 20px;
+}
+
+.admin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.admin i:first-child {
+    font-size: 22px;
+}
+
+/* ================= MAIN ================= */
+
+.container {
+    padding: 32px;
+    max-width: 1250px;
+    margin: auto;
+}
+
+/* ================= WELCOME ================= */
+
+.welcome {
+    min-height: 125px;
+    border: 1px solid #dddffc;
+    border-radius: 12px;
+    background: linear-gradient(100deg, #f7f5ff, #f9f9ff);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    margin-bottom: 36px;
+}
+
+.welcome-text {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.hand {
+    font-size: 35px;
+}
+
+.welcome h1 {
+    font-size: 29px;
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    color: #40547b;
+    font-size: 18px;
+}
+
+.date-box {
+    border-left: 1px solid #d8d9ec;
+    padding-left: 22px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 220px;
+}
+
+.date-box > i {
+    font-size: 28px;
+}
+
+.date-box strong {
+    font-size: 15px;
+}
+
+.date-box p {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* ================= CARDS ================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-bottom: 36px;
+}
+
+.card {
+    min-height: 275px;
+    border-radius: 12px;
+    padding: 25px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.daily {
+    background: linear-gradient(145deg, #d5e9ff, #b9d9fa);
+}
+
+.weekly {
+    background: linear-gradient(145deg, #eee5ff, #e3d5ff);
+}
+
+.products-card {
+    background: linear-gradient(145deg, #d8f5e8, #c4ebd9);
+}
+
+.profit-card {
+    background: linear-gradient(145deg, #ffecd2, #ffdcaf);
+}
+
+.card-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #286bd3;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 17px;
+}
+
+.weekly .card-icon {
+    background: #633dc4;
+}
+
+.products-card .card-icon {
+    background: #16a36b;
+}
+
+.profit-card .card-icon {
+    background: #f7933b;
+}
+
+.card h3 {
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.card h2 {
+    font-size: 28px;
+    margin-bottom: 7px;
+}
+
+.card p {
+    color: #40547b;
+    font-size: 16px;
+}
+
+.card-decoration {
+    position: absolute;
+    right: 15px;
+    top: 22px;
+    font-size: 55px;
+    opacity: 0.12;
+}
+
+.increase {
+    position: absolute;
+    bottom: 28px;
+    left: 20px;
+    font-size: 13px;
+    color: #287d58;
+}
+
+.increase:first-letter {
+    font-size: 23px;
+}
+
+.stock {
+    position: absolute;
+    bottom: 28px;
+    left: 20px;
+    color: #267354;
+    font-size: 14px;
+}
+
+/* ================= ANALYTICS ================= */
+
+.analytics {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.panel {
+    border: 1px solid #dfe3f5;
+    border-radius: 12px;
+    padding: 22px;
+    min-height: 370px;
+    background: white;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.panel h2 {
+    font-size: 22px;
+}
+
+/* ================= TABS ================= */
+
+.tabs {
+    display: flex;
+    border: 1px solid #d5d8eb;
+    border-radius: 22px;
+    overflow: hidden;
+}
+
+.tabs button {
+    border: none;
+    background: white;
+    padding: 9px 17px;
+    color: #506080;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tabs button.selected {
+    background: #6940ca;
+    color: white;
+    border-radius: 20px;
+}
+
+/* ================= LINE CHART ================= */
+
+.chart {
+    display: flex;
+    height: 270px;
+}
+
+.y-axis {
+    width: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 30px;
+    color: #536586;
+    font-size: 12px;
+}
+
+.chart-area {
+    flex: 1;
+    position: relative;
+    border-left: 1px solid #dce1ef;
+    border-bottom: 1px solid #dce1ef;
+}
+
+.grid-lines {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.grid-lines span {
+    border-top: 1px solid #e4e7f1;
+    width: 100%;
+}
+
+.line-chart {
+    width: 100%;
+    height: 220px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.days {
+    position: absolute;
+    bottom: -28px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    color: #536586;
+    font-size: 12px;
+}
+
+/* ================= DONUT ================= */
+
+.donut-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 290px;
+}
+
+.donut {
+    width: 225px;
+    height: 225px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #f3489b 0deg 115deg,
+        #713dd1 115deg 194deg,
+        #ffb83f 194deg 259deg,
+        #36c78c 259deg 302deg,
+        #3788e8 302deg 338deg,
+        #aab7cc 338deg 360deg
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.donut::after {
+    content: "";
+    width: 115px;
+    height: 115px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.donut-center {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.donut-center span {
+    display: block;
+    font-size: 13px;
+    color: #68738d;
+    margin-bottom: 5px;
+}
+
+.donut-center strong {
+    font-size: 16px;
+}
+
+.legend {
+    width: 185px;
+}
+
+.legend div {
+    display: flex;
+    align-items: center;
+    margin: 14px 0;
+    color: #52617f;
+    font-size: 14px;
+}
+
+.legend b {
+    margin-left: auto;
+    color: #1d2945;
+}
+
+.dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.pink {
+    background: #f3489b;
+}
+
+.purple {
+    background: #37336d
+}
+.yellow {
+    background: #ffb83f;
+}
+
+.green {
+    background: #36c78c;
+}
+
+.blue {
+    background: #3788e8;
+}
+
+.grey {
+    background: #aab7cc;
+}
+
+/* ================= GROWING ================= */
+
+.growing {
+    min-height: 115px;
+    border: 1px solid #d7eee2;
+    background: #effbf5;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 20px 28px;
+    gap: 20px;
+}
+
+.growth-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #72cd96;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.growing h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.growing p {
+    color: #506580;
+}
+
+.plant {
+    margin-left: auto;
+    font-size: 48px;
+}
+
+/* ================= BOTTOM BUTTONS ================= */
+
+.bottom-buttons {
+    min-height: 95px;
+    border-top: 1px solid #e1e3f0;
+    background: #fafaff;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 32px;
+}
+
+.bottom-btn {
+    min-width: 120px;
+    height: 56px;
+    padding: 0 22px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.products-btn {
+    background: linear-gradient(135deg, #8240db, #7041cf);
+}
+
+.sales-btn {
+    background: linear-gradient(135deg, #2879df, #2365c9);
+}
+
+.history-btn {
+    background: linear-gradient(135deg, #18b4ad, #12a39d);
+}
+
+.logout-btn {
+    background: linear-gradient(135deg, #fa4056, #ef3048);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1000px) {
+
+    .topbar {
+        padding: 0 18px;
+        gap: 15px;
+    }
+
+    .logo-section {
+        min-width: 220px;
+    }
+
+    nav a {
+        padding: 12px 10px;
+    }
+
+    nav a i {
+        display: none;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .analytics {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .topbar {
+        height: auto;
+        min-height: 70px;
+        flex-wrap: wrap;
+        padding: 15px;
+    }
+
+    .logo-section {
+        min-width: auto;
+    }
+
+    .logo-section h2 {
+        font-size: 18px;
+    }
+
+    .logo-section span {
+        font-size: 11px;
+    }
+
+    nav {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    nav a {
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .admin {
+        margin-left: auto;
+    }
+
+    .container {
+        padding: 18px;
+    }
+
+    .welcome {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .date-box {
+        border-left: none;
+        border-top: 1px solid #ddd;
+        padding-left: 0;
+        padding-top: 15px;
+        width: 100%;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics {
+        grid-template-columns: 1fr;
+    }
+
+    .panel-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .donut-content {
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+    }
+
+    .donut {
+        width: 180px;
+        height: 180px;
+    }
+
+    .donut::after {
+        width: 95px;
+        height: 95px;
+    }
+
+    .legend {
+        width: 100%;
+    }
+
+    .bottom-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .bottom-btn {
+        min-width: 130px;
+    }
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="sales-page">
+
+    <div class="sales-container">
+
+        <div class="sales-header">
+            <h1>Sales Management</h1>
+            <p>Sell products and manage your sales</p>
+        </div>
+
+        <!-- SELL PRODUCT -->
+        <div class="sales-form">
+
+            <select id="productSelect">
+                <option value="">Select Product</option>
+            </select>
+
+            <input
+                type="number"
+                id="saleQuantity"
+                placeholder="Quantity"
+                min="1"
+            >
+
+            <button onclick="sellProduct()">
+                Sell Product
+            </button>
+
+        </div>
+
+        <!-- AVAILABLE PRODUCTS -->
+        <div class="sales-table-container">
+
+            <h2>Available Products</h2>
+
+            <table class="sales-table">
+
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Selling Price</th>
+                        <th>Available Quantity</th>
+                    </tr>
+                </thead>
+
+                <tbody id="productList">
+                    <!-- Products will appear here -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <button class="back-button" onclick="goDashboard()">
+            Back to Dashboard
+        </button>
+
+    </div>
+
+    <script src="sales.js"></script>
+
+</body>
+</html>

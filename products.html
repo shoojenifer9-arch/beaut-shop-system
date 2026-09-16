@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="products-page">
+
+    <div class="products-container">
+
+        <div class="products-header">
+            <h1>Products Management</h1>
+            <p>Manage your beauty shop products</p>
+        </div>
+
+        <!-- ADD PRODUCT FORM -->
+        <div class="product-form">
+
+            <input type="text" id="productName" placeholder="Product Name">
+
+            <input type="number" id="buyingPrice" placeholder="Buying Price">
+
+            <input type="number" id="productPrice" placeholder="Selling Price">
+
+            <input type="number" id="productQuantity" placeholder="Quantity">
+
+            <button onclick="addProduct()">Add Product</button>
+
+        </div>
+
+        <!-- PRODUCT TABLE -->
+        <div class="product-table-container">
+
+            <h2>Product List</h2>
+
+            <table class="product-table">
+
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Buying Price</th>
+                        <th>Selling Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+
+                <tbody id="productList">
+                    <!-- Products will appear here -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <button class="back-button" onclick="goDashboard()">
+            Back to Dashboard
+        </button>
+
+    </div>
+
+    <script src="products.js"></script>
+
+</body>
+</html>

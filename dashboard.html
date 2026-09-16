@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Shop Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- TOP NAVIGATION -->
+    <header class="topbar">
+
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <div>
+                <h2>Beauty Shop</h2>
+                <span>Management System</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="dashboard.html" class="active">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+            <a href="products.html">
+                <i class="fa-solid fa-box"></i>
+                Products
+            </a>
+
+            <a href="sales.html">
+                <i class="fa-solid fa-sack-dollar"></i>
+                Sales
+            </a>
+
+            <a href="sales-history.html">
+                <i class="fa-solid fa-file-lines"></i>
+                Sales History
+            </a>
+        </nav>
+
+        <div class="admin">
+            <i class="fa-solid fa-user"></i>
+            <span>Admin</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+        <!-- WELCOME -->
+        <section class="welcome">
+
+            <div class="welcome-text">
+                <div class="hand">👋</div>
+
+                <div>
+                    <h1>Welcome Back, Admin!</h1>
+                    <p>Here's what's happening with your shop today.</p>
+                </div>
+            </div>
+
+            <div class="date-box">
+                <i class="fa-regular fa-calendar-days"></i>
+
+                <div>
+                    <strong>Today</strong>
+                    <p id="todayDate">Monday, 8 Sep 2025</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- STAT CARDS -->
+        <section class="cards">
+
+            <!-- DAILY SALES -->
+            <div class="card daily">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+
+                <div class="card-decoration">
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                </div>
+
+                <h3>Daily Sales</h3>
+
+                <h2 id="dailySales">TZS 150,000</h2>
+
+                <p>Today's total sales</p>
+
+                <div class="increase">
+                    ↗ <b>+12%</b> compared to yesterday
+                </div>
+
+            </div>
+
+
+            <!-- WEEKLY SALES -->
+            <div class="card weekly">
+
+                <div class="card-icon">
+                    <i class="fa-regular fa-calendar-days"></i>
+                </div>
+
+                <div class="card-decoration">
+                    <i class="fa-solid fa-chart-column"></i>
+                </div>
+
+                <h3>Weekly Sales</h3>
+
+                <h2 id="weeklySales">TZS 980,000</h2>
+
+                <p>This week's total sales</p>
+
+                <div class="increase">
+                    ↗ <b>+18%</b> compared to last week
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL PRODUCTS -->
+            <div class="card products-card">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+
+                <div class="card-decoration">
+                    <i class="fa-solid fa-cube"></i>
+                </div>
+
+                <h3>Total Products</h3>
+
+                <h2 id="totalProducts">24</h2>
+
+                <p>Different product types</p>
+
+                <div class="stock">
+                    <i class="fa-solid fa-cube"></i>
+                    In stock: <b id="stockItems">1,250 items</b>
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL PROFIT -->
+            <div class="card profit-card">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                </div>
+
+                <div class="card-decoration">
+                    <i class="fa-solid fa-chart-column"></i>
+                </div>
+
+                <h3>Total Profit</h3>
+
+                <h2 id="profit">TZS 0</h2>
+
+                <p>From sales (today)</p>
+
+                <div class="increase">
+                    ↗ <b>+15%</b> compared to yesterday
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CHART AREA -->
+        <section class="analytics">
+
+            <!-- SALES OVERVIEW -->
+            <div class="panel sales-overview">
+
+                <div class="panel-header">
+                    <h2>Sales Overview</h2>
+
+                    <div class="tabs">
+                        <button class="selected">Daily</button>
+                        <button>Weekly</button>
+                        <button>Monthly</button>
+                    </div>
+                </div>
+
+                <div class="chart">
+
+                    <div class="y-axis">
+                        <span>TZS 300,000</span>
+                        <span>TZS 225,000</span>
+                        <span>TZS 150,000</span>
+                        <span>TZS 75,000</span>
+                        <span>TZS 0</span>
+                    </div>
+
+                    <div class="chart-area">
+
+                        <div class="grid-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <svg viewBox="0 0 700 250"
+                             preserveAspectRatio="none"
+                             class="line-chart">
+
+                            <defs>
+                                <linearGradient id="areaGradient"
+                                                x1="0"
+                                                y1="0"
+                                                x2="0"
+                                                y2="1">
+
+                                    <stop offset="0%"
+                                          stop-color="#7545d8"
+                                          stop-opacity="0.25"/>
+
+                                    <stop offset="100%"
+                                          stop-color="#7545d8"
+                                          stop-opacity="0.02"/>
+
+                                </linearGradient>
+                            </defs>
+
+                            <path
+                                d="M0,190
+                                   C50,165 70,150 120,130
+                                   C170,110 190,125 240,105
+                                   C290,85 320,135 360,125
+                                   C410,110 440,75 480,85
+                                   C530,95 550,110 590,90
+                                   C630,70 650,50 700,25
+                                   L700,250 L0,250 Z"
+                                fill="url(#areaGradient)">
+                            </path>
+
+                            <path
+                                d="M0,190
+                                   C50,165 70,150 120,130
+                                   C170,110 190,125 240,105
+                                   C290,85 320,135 360,125
+                                   C410,110 440,75 480,85
+                                   C530,95 550,110 590,90
+                                   C630,70 650,50 700,25"
+                                fill="none"
+                                stroke="#7545d8"
+                                stroke-width="4">
+                            </path>
+
+                        </svg>
+
+                        <div class="days">
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                            <span>Sun</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- SALES BY PRODUCT -->
+            <div class="panel product-type">
+
+                <h2>Sales by Product Type</h2>
+
+                <div class="donut-content">
+
+                    <div class="donut">
+
+                        <div class="donut-center">
+                            <span>Total Sales</span>
+                            <strong>TZS 980,000</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="legend">
+
+                        <div>
+                            <span class="dot pink"></span>
+                            Skincare
+                            <b>32%</b>
+                        </div>
+
+                        <div>
+                            <span class="dot purple"></span>
+                            Hair Care
+                            <b>22%</b>
+                        </div>
+
+                        <div>
+                            <span class="dot yellow"></span>
+                            Makeup
+                            <b>18%</b>
+                        </div>
+
+                        <div>
+                            <span class="dot green"></span>
+                            Fragrances
+                            <b>12%</b>
+                        </div>
+
+                        <div>
+                            <span class="dot blue"></span>
+                            Body Care
+                            <b>10%</b>
+                        </div>
+
+                        <div>
+                            <span class="dot grey"></span>
+                            Others
+                            <b>6%</b>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GROWING MESSAGE -->
+        <section class="growing">
+
+            <div class="growth-icon">
+                <i class="fa-solid fa-arrow-trend-up"></i>
+            </div>
+
+            <div>
+                <h3>Your Business is Growing!</h3>
+                <p>
+                    Sales and profit have increased compared to last week.
+                    Keep it up!
+                </p>
+            </div>
+
+            <div class="plant">
+                🌱
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- BOTTOM BUTTONS -->
+    <footer class="bottom-buttons">
+
+        <a href="products.html" class="bottom-btn products-btn">
+            <i class="fa-solid fa-cube"></i>
+            Products
+        </a>
+
+        <a href="sales.html" class="bottom-btn sales-btn">
+            <i class="fa-solid fa-sack-dollar"></i>
+            Sales
+        </a>
+
+        <a href="sales-history.html" class="bottom-btn history-btn">
+            <i class="fa-solid fa-file-lines"></i>
+            Sales History
+        </a>
+
+        <button class="bottom-btn logout-btn" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </button>
+
+    </footer>
+
+
+    <script src="dashboard.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "shop-system",
+  "version": "1.0.0",
+  "description": "Shop Management System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@netlify/functions": "^6.0.0",
+    "express": "^5.2.1",
+    "mysql2": "^3.24.4",
+    "serverless-http": "^4.0.0"
+  }
+}

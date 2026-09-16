@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales History</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin-top: 25px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🛍️ Sales History</h1>
+    <button onclick="goToDashboard()">🏠 Back to Dashboard</button>
+<h2>Total Sales: TSh <span id="totalSales">0</span></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity Sold</th>
+                <th>Total</th>
+                <th>Date of Sale</th>
+            </tr>
+        </thead>
+
+        <tbody id="salesTableBody">
+            <!-- Sales will appear here -->
+        </tbody>
+    </table>
+<script>
+    fetch("/sales-history")
+        .then(response => response.json())
+        .then(sales => {
+
+            const tableBody = document.getElementById("salesTableBody");
+
+            sales.forEach(sale => {
+
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${sale.product_name}</td>
+                    <td>${sale.price}</td>
+                    <td>${sale.quantity}</td>
+                    <td>${sale.total}</td>
+                    <td>${sale.sale_date}</td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+const totalSales = sales.reduce((sum, sale) => {
+    return sum + Number(sale.total);
+}, 0);
+
+document.getElementById("totalSales").textContent = totalSales;
+        })
+        .catch(error => {
+            console.error("Error loading sales:", error);
+        });
+</script>
+</body>
+<script>
+    function goToDashboard() {
+        window.location.href = "dashboard.html";
+    }
+</script>
+</html>
