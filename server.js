@@ -10,12 +10,14 @@ app.use(express.static(__dirname));
 
 // ================= MYSQL CONNECTION =================
 
-const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "beautyshop"
-});
+const db = mysql.createConnection(
+    process.env.MYSQL_URL || {
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "beautyshop"
+    }
+);
 
 db.connect((err) => {
     if (err) {
