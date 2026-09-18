@@ -10,22 +10,18 @@ app.use(express.static(__dirname));
 
 // ================= MYSQL CONNECTION =================
 
-const db = mysql.createConnection(
-    process.env.MYSQL_URL || {
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "beautyshop"
-    }
-);
-
-db.connect((err) => {
-    if (err) {
-        console.log("MySQL connection failed:", err.message);
-    } else {
-        console.log("MySQL connected successfully!");
-    }
+const db = mysql.createPool({
+    host: process.env.MYSQLHOST || "localhost",
+    port: process.env.MYSQLPORT || 3306,
+    user: process.env.MYSQLUSER || "root",
+    password: process.env.MYSQLPASSWORD || "",
+    database: process.env.MYSQLDATABASE || "beautyshop",
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
+
+
 
 // ================= HOME PAGE =================
 
