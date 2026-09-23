@@ -129,3 +129,14 @@ async function loadDashboard() {
 document.addEventListener("DOMContentLoaded", function() {
     loadDashboard();
 });
+const today = new Date();
+
+const options = {
+    weekday: "long",
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+};
+
+document.getElementById("todayDate").textContent =
+    new Intl.DateTimeFormat("en-GB", options).format(today);
