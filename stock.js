@@ -68,7 +68,7 @@ async function stockIn() {
     const quantity = document.getElementById("stockQuantity").value;
     const buyingPrice = document.getElementById("stockBuyingPrice").value;
     const notes = document.getElementById("stockNotes").value.trim();
-
+    const expiryDate = document.getElementById("stockExpiryDate").value;
     if (!productId || quantity === "" || buyingPrice === "") {
         alert("Please select a product, quantity and buying price.");
         return;

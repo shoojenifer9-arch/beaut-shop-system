@@ -683,25 +683,51 @@ app.get("/stock-history", (req, res) => {
 
 // POST: Add incoming stock
 app.post("/stock/in", (req, res) => {
-    const { productId, quantity, buyingPrice, notes } = req.body;
+    const {
+        productId,
+        quantity,
+        buyingPrice,
+        expiryDate,
+        notes
+    } = req.body;
 
     const id = Number(productId);
     const qty = Number(quantity);
     const cost = Number(buyingPrice);
 
+    // Validate expiry date format and actual calendar date
+    const validDateFormat =
+        typeof expiryDate === "string" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(expiryDate);
+
+    let validExpiryDate = false;
+
+    if (validDateFormat) {
+        const [year, month, day] = expiryDate.split("-").map(Number);
+        const date = new Date(Date.UTC(year, month - 1, day));
+
+        validExpiryDate =
+            date.getUTCFullYear() === year &&
+            date.getUTCMonth() === month - 1 &&
+            date.getUTCDate() === day;
+    }
+
     if (
         !Number.isInteger(id) || id <= 0 ||
         !Number.isInteger(qty) || qty <= 0 ||
-        !Number.isFinite(cost) || cost < 0
+        !Number.isFinite(cost) || cost < 0 ||
+        !validExpiryDate
     ) {
         return res.status(400).json({
             success: false,
-            message: "Enter a valid product, quantity and buying price"
+            message: "Enter a valid product, quantity, buying price and expiry date"
         });
     }
 
-    if (notes != null &&
-        (typeof notes !== "string" || notes.length > 255)) {
+    if (
+        notes != null &&
+        (typeof notes !== "string" || notes.length > 255)
+    ) {
         return res.status(400).json({
             success: false,
             message: "Notes must not exceed 255 characters"
@@ -746,7 +772,7 @@ app.post("/stock/in", (req, res) => {
                     const before = Number(product.quantity);
                     const after = before + qty;
 
-                    // Update current stock and latest buying price
+                    // Update current product stock
                     connection.query(
                         `UPDATE products
                          SET quantity = ?, buying_price = ?
@@ -756,6 +782,7 @@ app.post("/stock/in", (req, res) => {
                             if (err) {
                                 return connection.rollback(() => {
                                     connection.release();
+                                    console.error(err);
                                     res.status(500).json({
                                         success: false,
                                         message: "Failed to update stock"
@@ -763,47 +790,81 @@ app.post("/stock/in", (req, res) => {
                                 });
                             }
 
+                            // Save this incoming batch and its expiry date
                             connection.query(
-                                `INSERT INTO stock_history
-                                (product_id, product_name, movement_type,
-                                 quantity, buying_price, stock_before,
-                                 stock_after, reason, notes, movement_date)
-                                VALUES (?, ?, 'IN', ?, ?, ?, ?,
-                                        'Stock received', ?, NOW())`,
-                                [
-                                    id, product.name, qty, cost,
-                                    before, after, notes || null
-                                ],
+                                `INSERT INTO stock_batches
+                                (product_id, quantity_received,
+                                 remaining_quantity, buying_price,
+                                 expiry_date, received_at)
+                                VALUES (?, ?, ?, ?, ?, NOW())`,
+                                [id, qty, qty, cost, expiryDate],
                                 err => {
                                     if (err) {
                                         return connection.rollback(() => {
                                             connection.release();
+                                            console.error(err);
                                             res.status(500).json({
                                                 success: false,
-                                                message: "Failed to save stock history"
+                                                message: "Failed to save stock batch and expiry date"
                                             });
                                         });
                                     }
 
-                                    connection.commit(err => {
-                                        if (err) {
-                                            return connection.rollback(() => {
+                                    // Save stock movement history
+                                    connection.query(
+                                        `INSERT INTO stock_history
+                                        (product_id, product_name,
+                                         movement_type, quantity,
+                                         buying_price, stock_before,
+                                         stock_after, reason, notes,
+                                         movement_date)
+                                        VALUES (?, ?, 'IN', ?, ?, ?, ?,
+                                                'Stock received', ?, NOW())`,
+                                        [
+                                            id,
+                                            product.name,
+                                            qty,
+                                            cost,
+                                            before,
+                                            after,
+                                            notes || null
+                                        ],
+                                        err => {
+                                            if (err) {
+                                                return connection.rollback(() => {
+                                                    connection.release();
+                                                    console.error(err);
+                                                    res.status(500).json({
+                                                        success: false,
+                                                        message: "Failed to save stock history"
+                                                    });
+                                                });
+                                            }
+
+                                            connection.commit(err => {
+                                                if (err) {
+                                                    return connection.rollback(() => {
+                                                        connection.release();
+                                                        console.error(err);
+                                                        res.status(500).json({
+                                                            success: false,
+                                                            message: "Failed to save stock transaction"
+                                                        });
+                                                    });
+                                                }
+
                                                 connection.release();
-                                                res.status(500).json({
-                                                    success: false,
-                                                    message: "Failed to save stock transaction"
+
+                                                res.json({
+                                                    success: true,
+                                                    message: "Stock received successfully",
+                                                    stockBefore: before,
+                                                    stockAfter: after,
+                                                    expiryDate
                                                 });
                                             });
                                         }
-
-                                        connection.release();
-                                        res.json({
-                                            success: true,
-                                            message: "Stock received successfully",
-                                            stockBefore: before,
-                                            stockAfter: after
-                                        });
-                                    });
+                                    );
                                 }
                             );
                         }
