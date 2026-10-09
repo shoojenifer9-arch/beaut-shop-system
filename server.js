@@ -1022,6 +1022,39 @@ app.post("/stock/out", (req, res) => {
         });
     });
 });
+// ================= EXPIRY ALERTS =================
+
+app.get("/expiry-alerts", (req, res) => {
+    const sql = `
+        SELECT
+            b.id AS batch_id,
+            b.product_id,
+            p.name AS product_name,
+            b.remaining_quantity,
+            b.expiry_date,
+            DATEDIFF(b.expiry_date, CURDATE()) AS days_remaining
+        FROM stock_batches b
+        JOIN products p ON p.id = b.product_id
+        WHERE b.remaining_quantity > 0
+          AND b.expiry_date <= DATE_ADD(CURDATE(), INTERVAL 30 DAY)
+        ORDER BY b.expiry_date ASC
+    `;
+
+    db.query(sql, (err, rows) => {
+        if (err) {
+            console.error("Expiry alerts error:", err);
+            return res.status(500).json({
+                success: false,
+                message: "Failed to load expiry alerts"
+            });
+        }
+
+        res.json({
+            success: true,
+            alerts: rows
+        });
+    });
+});
 // ================= START SERVER =================
 
 app.listen(PORT, () => {
