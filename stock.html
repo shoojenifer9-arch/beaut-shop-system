@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Management - Beauty Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="products-page">
+
+<div class="products-container">
+
+    <div class="products-header">
+        <h1>Stock Management</h1>
+        <p>Manage incoming and outgoing beauty products</p>
+    </div>
+
+    <div class="product-form">
+
+        <label for="stockProduct">Select Product</label>
+        <select id="stockProduct">
+            <option value="">Loading products...</option>
+        </select>
+
+        <label for="stockQuantity">Quantity</label>
+        <input type="number" id="stockQuantity"
+               min="1" step="1" placeholder="Enter quantity">
+
+        <label for="stockNotes">Notes (optional)</label>
+        <input type="text" id="stockNotes"
+               maxlength="255" placeholder="Supplier or other details">
+    </div>
+
+    <div class="product-form">
+        <h2>Stock In</h2>
+
+        <label for="stockBuyingPrice">Buying Price Per Item</label>
+        <input type="number" id="stockBuyingPrice"
+               min="0" step="0.01" placeholder="Buying price">
+
+        <button type="button" onclick="stockIn()">
+            Receive Stock
+        </button>
+    </div>
+
+    <div class="product-form">
+        <h2>Stock Out</h2>
+
+        <label for="stockReason">Reason</label>
+        <select id="stockReason">
+            <option value="">Select reason</option>
+            <option value="Damaged">Damaged</option>
+            <option value="Expired">Expired</option>
+            <option value="Lost">Lost</option>
+            <option value="Internal use">Internal use</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <button type="button" onclick="stockOut()">
+            Remove Stock
+        </button>
+    </div>
+
+    <div class="product-table-container">
+        <h2>Stock Movement History</h2>
+
+        <input type="search" id="historySearch"
+               placeholder="Search product or reason..."
+               oninput="filterHistory()">
+
+        <div class="table-scroll">
+            <table class="product-table">
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Product</th>
+                        <th>Movement</th>
+                        <th>Quantity</th>
+                        <th>Reason</th>
+                        <th>Stock Before</th>
+                        <th>Stock After</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+
+                <tbody id="stockHistoryList">
+                    <tr>
+                        <td colspan="8">Loading history...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <button class="back-button"
+            onclick="window.location.href='dashboard.html'">
+        Back to Dashboard
+    </button>
+
+</div>
+
+<script src="stock.js"></script>
+</body>
+</html>
