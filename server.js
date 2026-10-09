@@ -56,7 +56,7 @@ app.post("/login", (req, res) => {
 app.get("/products", (req, res) => {
 
     db.query(
-        "SELECT * FROM products ORDER BY id DESC",
+        "SELECT id, name, price, buying_price, quantity, date_added FROM products ORDER BY id DESC",
         (err, results) => {
 
             if (err) {
@@ -126,6 +126,131 @@ app.post("/products", (req, res) => {
                 message: "Product added successfully",
                 id: result.insertId
             });
+        }
+    );
+});
+// ================= EDIT PRODUCT =================
+
+app.put("/products/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const { name, buying_price, price, quantity } = req.body;
+
+    if (
+        !Number.isInteger(id) || id <= 0 ||
+        typeof name !== "string" || !name.trim() ||
+        name.trim().length > 100 ||
+        buying_price === undefined || buying_price === "" ||
+        price === undefined || price === "" ||
+        quantity === undefined || quantity === ""
+    ) {
+        return res.status(400).json({
+            success: false,
+            message: "Please provide valid product details"
+        });
+    }
+
+    const bp = Number(buying_price);
+    const sp = Number(price);
+    const qty = Number(quantity);
+
+    if (
+        !Number.isFinite(bp) || bp < 0 ||
+        !Number.isFinite(sp) || sp < 0 ||
+        !Number.isInteger(qty) || qty < 0
+    ) {
+        return res.status(400).json({
+            success: false,
+            message: "Prices must be non-negative and quantity must be a whole number"
+        });
+    }
+
+    const sql = `
+        UPDATE products
+        SET name = ?, buying_price = ?, price = ?, quantity = ?
+        WHERE id = ?
+    `;
+
+    db.query(sql, [name.trim(), bp, sp, qty, id], (err, result) => {
+        if (err) {
+            console.error("Edit product error:", err);
+            return res.status(500).json({
+                success: false,
+                message: "Failed to update product"
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Product not found"
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "Product updated successfully"
+        });
+    });
+});
+
+
+// ================= DELETE PRODUCT =================
+
+app.delete("/products/:id", (req, res) => {
+    const id = Number(req.params.id);
+
+    if (!Number.isInteger(id) || id <= 0) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid product ID"
+        });
+    }
+
+    // Protect products that already have sales history.
+    db.query(
+        "SELECT id FROM sales WHERE product_id = ? LIMIT 1",
+        [id],
+        (err, sales) => {
+            if (err) {
+                console.error("Check sales error:", err);
+                return res.status(500).json({
+                    success: false,
+                    message: "Could not check sales history"
+                });
+            }
+
+            if (sales.length > 0) {
+                return res.status(409).json({
+                    success: false,
+                    message: "This product has sales history and cannot be deleted. You can edit its details instead."
+                });
+            }
+
+            db.query(
+                "DELETE FROM products WHERE id = ?",
+                [id],
+                (deleteErr, result) => {
+                    if (deleteErr) {
+                        console.error("Delete product error:", deleteErr);
+                        return res.status(500).json({
+                            success: false,
+                            message: "Failed to delete product"
+                        });
+                    }
+
+                    if (result.affectedRows === 0) {
+                        return res.status(404).json({
+                            success: false,
+                            message: "Product not found"
+                        });
+                    }
+
+                    res.json({
+                        success: true,
+                        message: "Product deleted successfully"
+                    });
+                }
+            );
         }
     );
 });
