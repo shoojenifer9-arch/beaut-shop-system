@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expiry Alerts - Beauty Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="products-page">
+
+<div class="products-container">
+    <div class="products-header">
+        <h1>Expiry Alerts</h1>
+        <p>Monitor expired products and products expiring within 30 days.</p>
+    </div>
+
+    <div class="product-table-container">
+        <h2>Products Requiring Attention</h2>
+
+        <button type="button" onclick="loadExpiryAlerts()">
+            Refresh Alerts
+        </button>
+
+        <div class="table-scroll">
+            <table class="product-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Remaining Quantity</th>
+                        <th>Expiry Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="expiryAlertsList">
+                    <tr>
+                        <td colspan="4">Loading expiry alerts...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <button class="back-button"
+            onclick="window.location.href='dashboard.html'">
+        Back to Dashboard
+    </button>
+</div>
+
+<script src="expiry-alerts.js"></script>
+</body>
+</html>
